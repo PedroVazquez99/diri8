@@ -1,6 +1,6 @@
 import { MouseEventHandler, useContext, useState } from "react";
 import { MenuItem } from "../entities/MenuItem";
-import { foodItemsContext } from "../App";
+import { foodItemsContext } from "./MainComponent";
 import { useDispatch } from "react-redux";
 import { decrementQuantity } from "../slices/MenuItemSlice";
 import '../styles/foodOrder.css'
