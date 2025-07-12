@@ -1,17 +1,27 @@
 import React, { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
+import { getFirestore, doc, setDoc } from "firebase/firestore";
+
+const db = getFirestore();
 
 const RegisterForm: React.FC = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [role, setRole] = useState<"admin" | "usuario">("usuario");
     const [error, setError] = useState<string | null>(null);
 
     const handleRegister = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            await createUserWithEmailAndPassword(auth, email, password);
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             setError(null);
+            // Guarda el rol en Firestore
+            await setDoc(doc(db, "users", userCredential.user.uid), {
+                email,
+                role,
+            });
+            // alert("Registro exitoso");
         } catch (err: any) {
             setError(err.message);
         }
@@ -34,6 +44,10 @@ const RegisterForm: React.FC = () => {
                 onChange={e => setPassword(e.target.value)}
                 required
             />
+            <select value={role} onChange={e => setRole(e.target.value as "admin" | "usuario")}>
+                <option value="usuario">Usuario</option>
+                <option value="admin">Administrador</option>
+            </select>
             <button type="submit">Registrarse</button>
             {error && <p style={{ color: "red" }}>{error}</p>}
         </form>
