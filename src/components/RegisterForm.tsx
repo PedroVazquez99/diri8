@@ -12,7 +12,6 @@ const RegisterForm: React.FC = () => {
         try {
             await createUserWithEmailAndPassword(auth, email, password);
             setError(null);
-            alert("Registro exitoso");
         } catch (err: any) {
             setError(err.message);
         }
