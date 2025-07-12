@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
+import "../styles/RegisterForm.css";
 
 const db = getFirestore();
 
@@ -16,7 +17,6 @@ const RegisterForm: React.FC = () => {
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             setError(null);
-            // Guarda el rol en Firestore
             await setDoc(doc(db, "users", userCredential.user.uid), {
                 email,
                 role,
@@ -28,29 +28,35 @@ const RegisterForm: React.FC = () => {
     };
 
     return (
-        <form onSubmit={handleRegister}>
-            <h2>Registro</h2>
-            <input
-                type="email"
-                placeholder="Correo electrónico"
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-                required
-            />
-            <input
-                type="password"
-                placeholder="Contraseña"
-                value={password}
-                onChange={e => setPassword(e.target.value)}
-                required
-            />
-            <select value={role} onChange={e => setRole(e.target.value as "admin" | "usuario")}>
-                <option value="usuario">Usuario</option>
-                <option value="admin">Administrador</option>
-            </select>
-            <button type="submit">Registrarse</button>
-            {error && <p style={{ color: "red" }}>{error}</p>}
-        </form>
+        <div className="login-page">
+            <form onSubmit={handleRegister} className="login-form">
+                <h2>Registro</h2>
+                <input
+                    type="email"
+                    placeholder="Correo electrónico"
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                    required
+                />
+                <input
+                    type="password"
+                    placeholder="Contraseña"
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
+                    required
+                />
+                <select
+                    value={role}
+                    onChange={e => setRole(e.target.value as "admin" | "usuario")}
+                    className="role-select"
+                >
+                    <option value="usuario">Usuario</option>
+                    <option value="admin">Administrador</option>
+                </select>
+                {error && <p className="error-message">{error}</p>}
+                <button type="submit" className="btn-login">Registrarse</button>
+            </form>
+        </div>
     );
 };
 

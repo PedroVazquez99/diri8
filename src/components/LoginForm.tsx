@@ -3,6 +3,8 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import "./LoginForm.css";
+
 const LoginForm: React.FC = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -16,35 +18,43 @@ const LoginForm: React.FC = () => {
         try {
             await signInWithEmailAndPassword(auth, email, password);
             setError(null);
-            // Aquí deberías obtener el rol del usuario, por ejemplo desde tu base de datos
-            const userRole = "usuario"; // O "admin" según corresponda
-            login(userRole); // Actualiza el contexto de autenticación y rol
+            const userRole = "usuario";
+            login(userRole);
             navigate("/compracomida");
         } catch (err: any) {
             setError(err.message);
         }
     };
 
+    const goToRegister = () => {
+        navigate("/registro");
+    };
+
     return (
-        <form onSubmit={handleLogin}>
-            <h2>Iniciar Sesión</h2>
-            <input
-                type="email"
-                placeholder="Correo electrónico"
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-                required
-            />
-            <input
-                type="password"
-                placeholder="Contraseña"
-                value={password}
-                onChange={e => setPassword(e.target.value)}
-                required
-            />
-            <button type="submit">Entrar</button>
-            {error && <p style={{ color: "red" }}>{error}</p>}
-        </form>
+        <div className="login-page">
+            <form onSubmit={handleLogin} className="login-form">
+                <h2>Iniciar Sesión</h2>
+                <input
+                    type="email"
+                    placeholder="Correo electrónico"
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                    required
+                />
+                <input
+                    type="password"
+                    placeholder="Contraseña"
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
+                    required
+                />
+                {error && <p className="error-message">{error}</p>}
+                <button type="submit" className="btn-login">Entrar</button>
+                <button type="button" className="btn-register" onClick={goToRegister}>
+                    ¿No tienes cuenta? Regístrate
+                </button>
+            </form>
+        </div>
     );
 };
 

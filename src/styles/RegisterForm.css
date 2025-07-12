@@ -1,0 +1,107 @@
+/* Fondo general en toda la pantalla */
+body,
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Centrado del contenedor */
+.register-page {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Formulario tipo tarjeta */
+.register-form {
+    background-color: #ffffff;
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+/* Título */
+.register-form h2 {
+    color: #333;
+    margin-bottom: 1.8rem;
+    font-size: 1.9rem;
+}
+
+/* Inputs y selects */
+.register-form input,
+.register-form select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 1.2rem;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.register-form input:focus,
+.register-form select:focus {
+    border-color: #74c1ec;
+    outline: none;
+}
+
+/* Select personalizado */
+.role-select {
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+/* Contenedor de botones alineados */
+.button-row {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+/* Botón principal */
+.btn-register {
+    flex: 1;
+    padding: 12px;
+    background: linear-gradient(to right, #667eea, #764ba2);
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.btn-register:hover {
+    background: linear-gradient(to right, #556cd6, #663fa0);
+}
+
+/* Botón secundario */
+.btn-login-link {
+    flex: 1;
+    padding: 12px;
+    background: #fbbf24;
+    color: #333;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.btn-login-link:hover {
+    background: #f59e42;
+}
+
+/* Mensaje de error */
+.error-message {
+    color: #d93025;
+    font-size: 0.9rem;
+    margin-bottom: 0.8rem;
+}
