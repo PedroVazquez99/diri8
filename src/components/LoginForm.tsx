@@ -3,7 +3,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import "./LoginForm.css";
+import "../styles/LoginForm.css"; // Asegúrate de tener un archivo CSS para estilos
 
 const LoginForm: React.FC = () => {
     const [email, setEmail] = useState("");

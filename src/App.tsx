@@ -1,11 +1,9 @@
 import { Routes, Route } from "react-router-dom";
-import { useAuth } from "./context/AuthContext";
 import AuthPage from "./components/AuthPage"; // Tu login/registro
 import MainComponent from "./components/MainComponent";
 import PrivateRoute from "./guards/PrivateRoute"; // Tu ruta privada
 
 function App() {
-  const { role } = useAuth();
 
   return (
     <Routes>
