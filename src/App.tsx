@@ -7,7 +7,7 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/" element={<AuthPage />} />
+      <Route path="/diri8" element={<AuthPage />} />
       <Route path="/compracomida" element={<PrivateRoute><MainComponent /></PrivateRoute>} />
       {/* <Route
         path="/admin"
