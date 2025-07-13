@@ -1,0 +1,68 @@
+.auth-page-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 1rem;
+  margin-bottom: 1em;
+}
+
+.auth-page-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* Centrar todo el contenido en la pantalla */
+body, #root {
+  height: 100vh;
+  margin: 0;
+}
+
+.auth-page-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Asegúrate de que html y body ocupen toda la altura */
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Esto ya lo tienes, pero asegúrate de que se aplique correctamente */
+.auth-page-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Asegura ocupar toda la altura */
+}
+
+.auth-page-div button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #0b4177;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+.auth-page-div button:hover {
+  background-color: #3490e6;
+}
+
+#root{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}

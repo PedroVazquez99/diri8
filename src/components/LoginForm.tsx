@@ -26,10 +26,6 @@ const LoginForm: React.FC = () => {
         }
     };
 
-    const goToRegister = () => {
-        navigate("/registro");
-    };
-
     return (
         <div className="login-page">
             <form onSubmit={handleLogin} className="login-form">
@@ -48,11 +44,8 @@ const LoginForm: React.FC = () => {
                     onChange={e => setPassword(e.target.value)}
                     required
                 />
-                {error && <p className="error-message">{error}</p>}
+                {error && <p className="error-message">Credenciales incorrectas</p>}
                 <button type="submit" className="btn-login">Entrar</button>
-                <button type="button" className="btn-register" onClick={goToRegister}>
-                    ¿No tienes cuenta? Regístrate
-                </button>
             </form>
         </div>
     );

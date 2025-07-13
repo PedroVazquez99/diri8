@@ -1,22 +1,22 @@
 import React, { useState } from "react";
 import RegisterForm from "./RegisterForm";
 import LoginForm from "./LoginForm";
-import "../styles/AuthPage.css";
 
-const AuthPage: React.FC = () => {
+const RegisterPage: React.FC = () => {
     const [showRegister, setShowRegister] = useState(false);
 
     return (
-        <div className="auth-page-wrapper">
-            <div className="auth-page-div">
+        <>
+            <div>
                 <button onClick={() => setShowRegister(false)}>Iniciar Sesión</button>
                 <button onClick={() => setShowRegister(true)}>Registrarse</button>
+
             </div>
-            <div className="auth-page-content">
+            <div>
                 {showRegister ? <RegisterForm /> : <LoginForm />}
             </div>
-        </div>
+        </>
     );
 };
 
-export default AuthPage;
+export default RegisterPage;

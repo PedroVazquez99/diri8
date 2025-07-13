@@ -1,11 +1,10 @@
 /* LoginForm.css */
 
 .login-page {
-  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #f3f4f6; /* gris claro */
+  background: transparent; /* gris claro */
 }
 
 .login-form {
