@@ -95,6 +95,9 @@ const MainComponent: React.FC = () => {
                     )
                 )}
             </div>
+            <>
+                {(role === "admin" && isAuthenticated) ? <h2>asd</h2> : null}
+            </>
         </foodItemsContext.Provider>
     );
 };
