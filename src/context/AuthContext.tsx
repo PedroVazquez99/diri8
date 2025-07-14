@@ -1,39 +1,46 @@
-import React, { createContext, useContext, useState } from "react";
-
-type Role = "admin" | "usuario" | null;
-
-interface AuthContextType {
-    isAuthenticated: boolean;
-    role: Role;
-    login: (role: Role) => void;
-    logout: () => void;
+import React, {
+    createContext, useEffect, useState,
+    ReactNode
+} from 'react';
+import { authService } from '../services/AuthService';
+import { Role } from '../services/IAuthService';
+interface AuthContextProps {
+    user: any | null;
+    roles: Role[] | null;
+}
+export const AuthContext =
+    createContext<AuthContextProps>({
+        user: null, roles:
+            null
+    });
+interface AuthProviderProps {
+    children: ReactNode;
 }
 
-const AuthContext = createContext<AuthContextType>({
-    isAuthenticated: false,
-    role: null,
-    login: () => { },
-    logout: () => { },
-});
 
-export const useAuth = () => useContext(AuthContext);
 
-export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    const [isAuthenticated, setAuthenticated] = useState(false);
-    const [role, setRole] = useState<Role>(null);
-
-    const login = (userRole: Role) => {
-        setAuthenticated(true);
-        setRole(userRole);
-    };
-
-    const logout = () => {
-        setAuthenticated(false);
-        setRole(null);
-    };
-
+export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
+    const [user, setUser] = useState<any | null>(null);
+    const [roles, setRoles] = useState<Role[] | null>(null);
+    useEffect(() => {
+        const unsubscribe = authService.onAuthStateChanged(async (currentUser) => {
+            setUser(currentUser);
+            if (currentUser) {
+                try {
+                    const userRoles = await authService.getUserRoles(currentUser);
+                    setRoles(userRoles);
+                } catch (error) {
+                    console.error('Error al obtener los roles:', error);
+                    setRoles(null);
+                }
+            } else {
+                setRoles(null);
+            }
+        });
+        return unsubscribe;
+    }, []);
     return (
-        <AuthContext.Provider value={{ isAuthenticated, role, login, logout }}>
+        <AuthContext.Provider value={{ user, roles }}>
             {children}
         </AuthContext.Provider>
     );
