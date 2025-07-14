@@ -1,10 +1,10 @@
-import { IAuthService, Role } from './IAuthService';
+import { IAuthService, Role } from '../IAuthService';
 import {
     getAuth, signInWithEmailAndPassword,
     createUserWithEmailAndPassword, signOut, onAuthStateChanged
 } from 'firebase/auth';
 import { app } from '../../firebase';
-import { FirebaseDatabaseService } from './FirebaseDatabaseService';
+import { FirebaseDatabaseService } from '../FirebaseDatabaseService';
 const auth = getAuth(app);
 
 export class FirebaseAuthService implements IAuthService {
