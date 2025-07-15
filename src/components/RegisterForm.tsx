@@ -1,7 +1,4 @@
 import React, { useState } from "react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { getFirestore, doc, setDoc } from "firebase/firestore";
-import { auth } from "../firebase";
 import "../styles/RegisterForm.css";
 import { useNavigate } from "react-router-dom";
 import { authService } from "../services/AuthService";

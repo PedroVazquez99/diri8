@@ -4,7 +4,7 @@ import { MenuItem } from "../entities/MenuItem";
 import FoodOrder from "../components/FoodOrder";
 
 // Obtén el estado de autenticación y rol
-import { AuthContext, useAuth } from "../context/AuthContext";
+import { AuthContext } from "../context/AuthContext";
 import { Role } from "../services/IAuthService";
 
 const Foods = React.lazy(() => import("../components/Foods")); // Lazy load
