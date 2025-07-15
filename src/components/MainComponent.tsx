@@ -1,10 +1,11 @@
-import React, { Suspense, useState, createContext } from "react";
+import React, { Suspense, useState, createContext, useContext } from "react";
 
 import { MenuItem } from "../entities/MenuItem";
 import FoodOrder from "../components/FoodOrder";
 
 // Obtén el estado de autenticación y rol
-import { useAuth } from "../context/AuthContext";
+import { AuthContext, useAuth } from "../context/AuthContext";
+import { Role } from "../services/IAuthService";
 
 const Foods = React.lazy(() => import("../components/Foods")); // Lazy load
 export const foodItemsContext = createContext<MenuItem[]>([]); // Contexto para pasar los items de comida
@@ -13,7 +14,7 @@ const MainComponent: React.FC = () => {
     const [selectedFood, setSelectedFood] = useState<MenuItem | null>(null);
     const [isChooseFoodPage, setIsChooseFoodPage] = useState(false);
 
-    const { isAuthenticated, role } = useAuth();
+    const { roles, isAuthenticated } = useContext(AuthContext);
     const [menuItems] = useState<MenuItem[]>([
         {
             id: 1,
@@ -62,7 +63,7 @@ const MainComponent: React.FC = () => {
                         </button>
                         <h3 className="title">Comida Rápida Online</h3>
                         {/* Mostrar stock solo si es admin */}
-                        {!isChooseFoodPage && role === "admin" && (
+                        {!isChooseFoodPage && roles?.includes(Role.ADMIN) && (
                             <>
                                 <h4 className="subTitle">Menús</h4>
                                 <ul className="ulApp">
@@ -93,10 +94,14 @@ const MainComponent: React.FC = () => {
                     ) : (
                         <p>Debes iniciar sesión para hacer pedidos.</p>
                     )
+
                 )}
+                <>
+                    {console.log(roles)}
+                </>
             </div>
             <>
-                {(role === "admin" && isAuthenticated) ? <h2>asd</h2> : null}
+                {console.log(roles)}
             </>
         </foodItemsContext.Provider>
     );

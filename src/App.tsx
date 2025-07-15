@@ -3,6 +3,7 @@ import AuthPage from "./components/AuthPage"; // Tu login/registro
 import MainComponent from "./components/MainComponent";
 import PrivateRoute from "./guards/PrivateRoute"; // Tu ruta privada
 import RegisterPage from "./components/RegisterPage";
+import AdminRoute from "./guards/AdminRoute";
 
 function App() {
 

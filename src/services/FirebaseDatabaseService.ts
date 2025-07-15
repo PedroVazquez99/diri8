@@ -6,13 +6,14 @@ export class FirebaseDatabaseService implements
     IUserDatabaseService {
     async getUserRoles(uid: string): Promise<Role[]> {
         const db = getDatabase(app);
-        const rolesRef = ref(db, `users/${uid}/roles`);
+        const rolesRef = ref(db, `users/${uid}`);
         const snapshot = await get(rolesRef);
 
         if (snapshot.exists()) {
             const rolesData = snapshot.val();
+            console.log(rolesData);
             const roles: Role[] = [];
-            if (rolesData.admin === true) {
+            if (rolesData.roles.admin === true) {
                 roles.push(Role.ADMIN);
             }
             // Aquí se pueden agregar otros roles según se requiera.

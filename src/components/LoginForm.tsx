@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase";
+import { authService } from '../services/AuthService';
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
 import "../styles/LoginForm.css"; // Asegúrate de tener un archivo CSS para estilos
 
 const LoginForm: React.FC = () => {
@@ -11,18 +9,16 @@ const LoginForm: React.FC = () => {
     const [error, setError] = useState<string | null>(null);
     const navigate = useNavigate();
 
-    const { login } = useAuth();
-
-    const handleLogin = async (e: React.FormEvent) => {
+    const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        setError('');
         try {
-            await signInWithEmailAndPassword(auth, email, password);
-            setError(null);
-            const userRole = "usuario";
-            login(userRole);
-            navigate("/compracomida");
-        } catch (err: any) {
-            setError(err.message);
+            const userCredential = await authService.signIn(email, password);
+            console.log("Usuario autenticado:", userCredential.user);
+            navigate('/compracomida');
+        } catch (error: any) {
+            console.error("Error al iniciar sesión:", error);
+            setError(error.message);
         }
     };
 

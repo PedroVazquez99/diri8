@@ -8,12 +8,14 @@ import { getAuth } from "firebase/auth";
 const firebaseConfig = {
     apiKey: "AIzaSyAW9gUEGqWNJDV8J_SOg_MHs5FAmytHgCM",
     authDomain: "diri8-216d4.firebaseapp.com",
+    databaseURL: "https://diri8-216d4-default-rtdb.europe-west1.firebasedatabase.app",
     projectId: "diri8-216d4",
     storageBucket: "diri8-216d4.firebasestorage.app",
     messagingSenderId: "1029873586868",
     appId: "1:1029873586868:web:6d73a38e60f97b1681fde1",
     measurementId: "G-KM0L0ND6Q9"
 };
+
 
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);
